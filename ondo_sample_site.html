@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antique Café on℃ 温度 | 守口市 大日駅徒歩1分</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#1a1410;color:#f0e8d8;font-family:'Noto Sans JP',sans-serif;font-weight:300;padding-bottom:80px}
+
+.reserve-bar{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0d0a08;display:flex;gap:2px;padding:10px 12px;box-shadow:0 -4px 20px rgba(0,0,0,0.5)}
+.reserve-bar a{flex:1;padding:13px 4px;text-align:center;font-size:12px;font-weight:700;text-decoration:none;border-radius:4px;display:block}
+.btn-tel{background:#6a4820;color:#f0e8d8}
+.btn-line{background:#06c755;color:white}
+.btn-web{background:#c8963e;color:#0d0a08}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(13,10,8,.97);border-bottom:1px solid rgba(200,150,62,.2);padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-size:20px;font-style:italic;color:#c8963e;text-decoration:none;letter-spacing:2px}
+.nav-links{display:flex;gap:20px;list-style:none}
+.nav-links a{font-size:11px;color:rgba(240,232,216,.4);text-decoration:none;letter-spacing:1px}
+
+/* HERO - アンティーク・金色・ゴージャス */
+.hero{background:#0d0a08;padding:56px 24px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(200,150,62,.2)}
+.hero::before{content:'℃';position:absolute;right:-40px;top:-20px;font-size:320px;font-weight:600;color:rgba(200,150,62,.04);line-height:1;pointer-events:none}
+.hero-badge{display:inline-block;border:1px solid rgba(200,150,62,.4);color:#c8963e;font-size:10px;letter-spacing:4px;padding:5px 16px;margin-bottom:20px;font-style:italic}
+.hero h1{font-size:clamp(32px,7vw,64px);font-weight:400;color:#f0e8d8;letter-spacing:4px;margin-bottom:4px;line-height:1.2}
+.hero h1 em{font-style:italic;color:#c8963e;display:block;font-size:.6em;letter-spacing:8px}
+.hero-sub{font-size:11px;color:rgba(240,232,216,.35);letter-spacing:3px;margin-bottom:32px;display:block}
+.hero-features{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.hero-feature{background:rgba(200,150,62,.1);border:1px solid rgba(200,150,62,.2);color:rgba(240,232,216,.7);font-size:11px;padding:5px 14px;letter-spacing:1px}
+.hero-cta{display:flex;flex-direction:column;gap:12px;max-width:300px;margin:0 auto}
+.hero-cta a{display:block;padding:17px;text-align:center;font-size:14px;font-weight:700;text-decoration:none;border-radius:4px}
+.cta-primary{background:#c8963e;color:#0d0a08}
+.cta-secondary{border:1px solid rgba(200,150,62,.3);color:rgba(240,232,216,.6)}
+
+/* アクセスバー */
+.access-bar{background:#1a1208;padding:14px 20px;display:flex;justify-content:center;gap:32px;border-bottom:1px solid rgba(200,150,62,.1)}
+.access-item{text-align:center}
+.access-label{font-size:9px;letter-spacing:3px;color:rgba(240,232,216,.25);display:block;margin-bottom:4px}
+.access-val{font-size:13px;font-weight:700;color:#f0e8d8;font-family:'Noto Serif JP',serif}
+
+.section{padding:48px 24px;max-width:640px;margin:0 auto}
+.sec-label{font-size:10px;letter-spacing:4px;color:#c8963e;display:block;margin-bottom:8px;font-style:italic}
+.sec-heading{font-size:26px;color:#f0e8d8;margin-bottom:28px}
+
+/* 特徴カード */
+.feature-list{display:flex;flex-direction:column;gap:12px}
+.feature-item{background:#1a1208;padding:20px;border-left:3px solid #c8963e}
+.feature-item h3{font-family:'Noto Serif JP',serif;font-size:15px;font-weight:600;color:#c8963e;margin-bottom:6px}
+.feature-item p{font-size:13px;color:rgba(240,232,216,.6);line-height:2}
+
+/* MENU */
+.menu-bg{background:#0d0a08;padding:48px 24px;border-top:1px solid rgba(200,150,62,.1);border-bottom:1px solid rgba(200,150,62,.1)}
+.menu-inner{max-width:640px;margin:0 auto}
+.menu-bg .sec-label{color:#c8963e}
+.menu-bg .sec-heading{color:#f0e8d8}
+.menu-tabs{display:flex;gap:2px;margin-bottom:20px;overflow-x:auto}
+.menu-tab{flex-shrink:0;padding:10px 20px;font-size:12px;font-weight:700;background:rgba(255,255,255,.05);color:rgba(240,232,216,.3);border:none;cursor:pointer;letter-spacing:1px;transition:all .3s;font-family:'Noto Serif JP',serif}
+.menu-tab.active{background:#c8963e;color:#0d0a08}
+.menu-content{display:none}
+.menu-content.active{display:block}
+.menu-list{display:flex;flex-direction:column;gap:2px}
+.menu-item{background:rgba(255,255,255,.03);padding:18px 16px;display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid rgba(200,150,62,.08)}
+.menu-item:last-child{border-bottom:none}
+.menu-name{font-family:'Noto Serif JP',serif;font-size:14px;color:#f0e8d8;display:block;margin-bottom:4px}
+.menu-desc{font-size:12px;color:rgba(240,232,216,.35);line-height:1.7}
+.menu-price{font-size:20px;color:#c8963e;white-space:nowrap;flex-shrink:0}
+
+/* 営業時間 */
+.hours-list{display:flex;flex-direction:column;gap:2px}
+.hours-item{background:#1a1208;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.hours-day{font-size:13px;font-weight:700;min-width:72px;font-family:'Noto Serif JP',serif}
+.hours-time{font-size:13px;color:rgba(240,232,216,.6)}
+.badge{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:700}
+.badge-open{background:rgba(200,150,62,.15);color:#c8963e;border:1px solid rgba(200,150,62,.3)}
+.badge-closed{background:rgba(255,255,255,.05);color:rgba(240,232,216,.25)}
+.hours-note{font-size:12px;color:rgba(240,232,216,.3);margin-top:12px;line-height:1.8}
+
+/* RESERVE */
+.reserve-bg{background:#6a4820;padding:48px 24px}
+.reserve-inner{max-width:640px;margin:0 auto}
+.reserve-bg .sec-label{color:rgba(240,232,216,.5)}
+.reserve-bg .sec-heading{color:#f0e8d8;font-family:'Cormorant Garamond',serif}
+.reserve-note{font-size:13px;color:rgba(240,232,216,.7);line-height:2;margin-bottom:20px}
+.reserve-list{display:flex;flex-direction:column;gap:10px}
+.reserve-item{background:rgba(255,255,255,.1);padding:18px 20px;display:flex;align-items:center;gap:16px;text-decoration:none;color:#f0e8d8}
+.r-icon{font-size:11px;letter-spacing:1px;background:rgba(255,255,255,.15);padding:6px 10px;flex-shrink:0;font-weight:700}
+.r-label{font-size:11px;color:rgba(240,232,216,.5);display:block;margin-bottom:4px}
+.r-val{font-size:15px;font-weight:700;font-family:'Noto Serif JP',serif}
+.r-arrow{margin-left:auto;font-size:20px;opacity:.5}
+
+.access-list{display:flex;flex-direction:column}
+.access-row{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid rgba(200,150,62,.1)}
+.access-row:last-child{border-bottom:none}
+.access-key{font-size:11px;letter-spacing:2px;color:#c8963e;width:72px;flex-shrink:0;padding-top:2px}
+.access-val{font-size:14px;color:rgba(240,232,216,.7);line-height:1.8}
+.map-area{background:#1a1208;height:180px;margin-top:20px;display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(240,232,216,.2);border:1px solid rgba(200,150,62,.1)}
+
+footer{background:#0d0a08;padding:28px 20px;text-align:center;border-top:1px solid rgba(200,150,62,.1)}
+.footer-logo{font-size:20px;font-style:italic;color:rgba(200,150,62,.3);letter-spacing:4px;display:block;margin-bottom:6px}
+.footer-copy{font-size:11px;color:rgba(240,232,216,.15)}
+</style>
+</head>
+<body>
+
+<div class="reserve-bar">
+  <a href="tel:06-6991-8050" class="btn-tel">電話で予約</a>
+  <a href="#reserve" class="btn-line">LINEで予約</a>
+  <a href="#reserve" class="btn-web">席を予約</a>
+</div>
+
+<nav>
+  <a href="#top" class="nav-logo">on℃ 温度</a>
+  <ul class="nav-links">
+    <li><a href="#menu">メニュー</a></li>
+    <li><a href="#hours">営業時間</a></li>
+    <li><a href="#reserve">予約</a></li>
+    <li><a href="#access">アクセス</a></li>
+  </ul>
+</nav>
+
+<section id="top" class="hero">
+  <div class="hero-badge">Antique Café Dining</div>
+  <h1>on℃<em>温度</em></h1>
+  <span class="hero-sub">守口市 大日駅7番出口 徒歩1分</span>
+  <div class="hero-features">
+    <span class="hero-feature">アンティーク空間</span>
+    <span class="hero-feature">農家直送野菜</span>
+    <span class="hero-feature">貸切55名まで</span>
+    <span class="hero-feature">無料駐車場</span>
+    <span class="hero-feature">飲み放題あり</span>
+    <span class="hero-feature">Instagram 4,284人</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#reserve" class="cta-primary">今すぐ席を予約する</a>
+    <a href="#menu" class="cta-secondary">メニューを見る</a>
+  </div>
+</section>
+
+<div class="access-bar">
+  <div class="access-item"><span class="access-label">アクセス</span><span class="access-val">大日駅 徒歩1分</span></div>
+  <div class="access-item"><span class="access-label">駐車場</span><span class="access-val">無料あり</span></div>
+  <div class="access-item"><span class="access-label">貸切</span><span class="access-val">55名まで</span></div>
+</div>
+
+<div class="section">
+  <span class="sec-label">About</span>
+  <div class="sec-heading">アンティークな空間で、<br>特別な時間を。</div>
+  <div class="feature-list">
+    <div class="feature-item">
+      <h3>契約農家直送の良質な野菜</h3>
+      <p>産地直送の新鮮野菜を使った料理をご提供。素材の旨みを活かした一品をお楽しみいただけます。</p>
+    </div>
+    <div class="feature-item">
+      <h3>アンティーク家具に囲まれた空間</h3>
+      <p>ラグジュアリーなソファ席で、非日常的なひとときを。女子会・記念日・ビジネスランチにも。</p>
+    </div>
+    <div class="feature-item">
+      <h3>貸切・飲み放題プランあり</h3>
+      <p>最大55名まで貸切可能。忘年会・新年会・誕生日パーティーなど各種ご宴会に対応します。</p>
+    </div>
+  </div>
+</div>
+
+<div class="menu-bg" id="menu">
+  <div class="menu-inner">
+    <span class="sec-label">Menu</span>
+    <div class="sec-heading">メニュー</div>
+    <div class="menu-tabs">
+      <button class="menu-tab active" onclick="showTab(this,'lunch')">ランチ</button>
+      <button class="menu-tab" onclick="showTab(this,'dinner')">ディナー</button>
+      <button class="menu-tab" onclick="showTab(this,'cafe')">カフェ</button>
+      <button class="menu-tab" onclick="showTab(this,'party')">宴会</button>
+    </div>
+    <div class="menu-content active" id="tab-lunch">
+      <div class="menu-list">
+        <div class="menu-item"><div><span class="menu-name">ハンバーグ・デミグラスソース</span><span class="menu-desc">スープ・パンまたは雑穀米・フルーツ付き</span></div><div class="menu-price">¥1,580</div></div>
+        <div class="menu-item"><div><span class="menu-name">本日の日替わりパスタ</span><span class="menu-desc">パン・サラダ・スープ・フルーツ付き</span></div><div class="menu-price">¥1,380</div></div>
+        <div class="menu-item"><div><span class="menu-name">ふわとろタマゴのオムライス</span><span class="menu-desc">スープ・サラダ・フルーツ付き</span></div><div class="menu-price">¥1,280</div></div>
+        <div class="menu-item"><div><span class="menu-name">牛フィレステーキ</span><span class="menu-desc">スープ・サラダ・フルーツ付き</span></div><div class="menu-price">¥2,500〜</div></div>
+      </div>
+    </div>
+    <div class="menu-content" id="tab-dinner">
+      <div class="menu-list">
+        <div class="menu-item"><div><span class="menu-name">農家直送野菜のサラダ</span><span class="menu-desc">その日届いた新鮮野菜をそのままに</span></div><div class="menu-price">¥880</div></div>
+        <div class="menu-item"><div><span class="menu-name">お肉料理各種</span><span class="menu-desc">旬の食材を使ったシェフおすすめの一品</span></div><div class="menu-price">¥1,500〜</div></div>
+        <div class="menu-item"><div><span class="menu-name">ワイン各種</span><span class="menu-desc">イタリア仕入れのワインをグラスで</span></div><div class="menu-price">¥700〜</div></div>
+      </div>
+    </div>
+    <div class="menu-content" id="tab-cafe">
+      <div class="menu-list">
+        <div class="menu-item"><div><span class="menu-name">アフタヌーンティーセット</span><span class="menu-desc">ご好評いただいている人気メニュー</span></div><div class="menu-price">¥1,500〜</div></div>
+        <div class="menu-item"><div><span class="menu-name">パフェ各種</span><span class="menu-desc">フルーツたっぷりの見た目も可愛いパフェ</span></div><div class="menu-price">¥900〜</div></div>
+        <div class="menu-item"><div><span class="menu-name">ドリンク各種</span><span class="menu-desc">コーヒー・紅茶・ジュース・お酒</span></div><div class="menu-price">¥500〜</div></div>
+      </div>
+    </div>
+    <div class="menu-content" id="tab-party">
+      <div class="menu-list">
+        <div class="menu-item"><div><span class="menu-name">飲み放題付きコース</span><span class="menu-desc">2時間飲み放題込みの宴会コース。2名様〜</span></div><div class="menu-price">¥3,500〜/人</div></div>
+        <div class="menu-item"><div><span class="menu-name">貸切プラン</span><span class="menu-desc">最大55名まで貸切可能。詳細はお問い合わせください</span></div><div class="menu-price">要問合せ</div></div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:rgba(240,232,216,.2);margin-top:14px">※メニュー・価格は変更になる場合があります。</p>
+  </div>
+</div>
+
+<div class="section" id="hours">
+  <span class="sec-label">Hours</span>
+  <div class="sec-heading">営業時間</div>
+  <div class="hours-list">
+    <div class="hours-item"><span class="hours-day">火〜日</span><span class="hours-time">11:30 〜 23:00（L.O. 22:00）</span><span class="badge badge-open">営業</span></div>
+    <div class="hours-item"><span class="hours-day">月曜日</span><span class="hours-time">—</span><span class="badge badge-closed">定休日</span></div>
+  </div>
+  <p class="hours-note">大日駅7番出口から徒歩1分。ラハートビル2F。</p>
+</div>
+
+<div class="reserve-bg" id="reserve">
+  <div class="reserve-inner">
+    <span class="sec-label">Reservation</span>
+    <div class="sec-heading">ご予約</div>
+    <p class="reserve-note">お席に限りがあります。貸切・宴会のご相談もお気軽にどうぞ。</p>
+    <div class="reserve-list">
+      <a href="tel:06-6991-8050" class="reserve-item">
+        <span class="r-icon">TEL</span>
+        <div><span class="r-label">電話でご予約</span><span class="r-val">06-6991-8050</span></div>
+        <span class="r-arrow">›</span>
+      </a>
+      <a href="#" class="reserve-item">
+        <span class="r-icon">LINE</span>
+        <div><span class="r-label">LINEでご予約</span><span class="r-val">友だち追加して予約</span></div>
+        <span class="r-arrow">›</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="access">
+  <span class="sec-label">Access</span>
+  <div class="sec-heading">アクセス</div>
+  <div class="access-list">
+    <div class="access-row"><span class="access-key">住所</span><span class="access-val">大阪府守口市大日町1-2-1 ラハートビル2F</span></div>
+    <div class="access-row"><span class="access-key">アクセス</span><span class="access-val">大阪メトロ谷町線「大日駅」7番出口より徒歩1分</span></div>
+    <div class="access-row"><span class="access-key">電話</span><span class="access-val">06-6991-8050</span></div>
+    <div class="access-row"><span class="access-key">駐車場</span><span class="access-val">無料駐車場あり</span></div>
+    <div class="access-row"><span class="access-key">定休日</span><span class="access-val">月曜日</span></div>
+  </div>
+  <div class="map-area">Googleマップ埋め込み予定</div>
+</div>
+
+<footer>
+  <span class="footer-logo">on℃ 温度</span>
+  <div class="footer-copy">© 2026 Antique Café on℃ 温度 — Moriguchi, Osaka</div>
+</footer>
+
+<script>
+function showTab(btn,id){
+  document.querySelectorAll('.menu-content').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.menu-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
